@@ -108,5 +108,23 @@
         "userName": "alice"
       }
     }
+  ],
+  "expected_alerts": [
+    {
+      "event_id": "7f2a91c0-3e55-4d88-9b10-cloudtrail-stop",
+      "rule_id": "c53e9f08-dbd4-4a4f-b29e-fb5117d6960e"
+    },
+    {
+      "event_id": "0c8d44aa-91b7-4f02-a6de-cloudtrail-delete",
+      "rule_id": "bd1e2195-46c0-4cb3-b2cb-d109daab8164"
+    },
+    {
+      "event_id": "91e0bb17-6c4a-4d33-b8f1-iam-key-create",
+      "rule_id": "d57dbb88-eea3-4724-ba0e-826cf42b2dad"
+    },
+    {
+      "event_id": "bb31f0c8-2a19-4e77-90cd-iam-policy-attach",
+      "rule_id": "e1ff68e8-2c89-4d7d-9140-6d580aadf8c1"
+    }
   ]
 }

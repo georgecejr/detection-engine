@@ -5,7 +5,10 @@ on:
     branches: [main]
     paths:
       - "detections/**"
+      - "src/**"
       - "scripts/**"
+      - "tests/**"
+      - "pyproject.toml"
       - ".github/workflows/deploy.yml"
   workflow_dispatch:
 

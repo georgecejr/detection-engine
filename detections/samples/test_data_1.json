@@ -119,5 +119,23 @@
       },
       "severity": "INFO"
     }
+  ],
+  "expected_alerts": [
+    {
+      "event_id": "2c0b6a3e-1f44-4d91-9c77-okta-mfa-reset",
+      "rule_id": "2d4d54ee-9656-4502-b779-6d12d31b1e6e"
+    },
+    {
+      "event_id": "8a91c2d4-55e0-4b18-ae02-okta-user-create",
+      "rule_id": "c59a3120-51af-427a-9fa6-9567cf391b9b"
+    },
+    {
+      "event_id": "c4e7b190-9a22-4f6d-81ab-okta-admin-grant",
+      "rule_id": "f8603214-b75e-4506-bb35-4295e81da5a0"
+    },
+    {
+      "event_id": "de11a804-0c63-4e2f-b9c5-okta-policy-update",
+      "rule_id": "914c1d22-fd78-4537-814d-d8511368283f"
+    }
   ]
 }

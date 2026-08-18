@@ -2,18 +2,8 @@ name: Validate detections
 
 on:
   pull_request:
-    paths:
-      - "detections/**"
-      - "scripts/**"
-      - "requirements-dev.txt"
-      - ".github/workflows/validate.yml"
   push:
     branches: [main]
-    paths:
-      - "detections/**"
-      - "scripts/**"
-      - "requirements-dev.txt"
-      - ".github/workflows/validate.yml"
   workflow_call:
   workflow_dispatch:
 
@@ -29,8 +19,14 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install validation dependencies
+      - name: Install package
         run: python3 -m pip install -r requirements-dev.txt
 
       - name: Validate detections tree
-        run: python3 scripts/validate_detections.py
+        run: python3 -m detection_engine validate
+
+      - name: Run unit tests
+        run: python3 -m pytest -q
+
+      - name: Evaluate sample events
+        run: python3 -m detection_engine run
