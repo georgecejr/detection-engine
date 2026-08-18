@@ -1,0 +1,22 @@
+title: AWS CloudTrail Logging Stopped
+id: c53e9f08-dbd4-4a4f-b29e-fb5117d6960e
+status: experimental
+description: >
+  Detects StopLogging against a CloudTrail trail. Disabling audit logging is a
+  common defense-evasion step after compromise.
+author: detection-engine
+date: 2026/08/18
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    eventSource: cloudtrail.amazonaws.com
+    eventName: StopLogging
+  condition: selection
+falsepositives:
+  - Trail teardown during a controlled account decommission
+level: high
+tags:
+  - attack.defense_evasion
+  - attack.t1562.001

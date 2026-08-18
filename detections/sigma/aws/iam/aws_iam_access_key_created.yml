@@ -1,0 +1,22 @@
+title: AWS IAM Access Key Created
+id: d57dbb88-eea3-4724-ba0e-826cf42b2dad
+status: experimental
+description: >
+  Detects creation of a new IAM access key. Unexpected keys can indicate
+  persistence after credential theft.
+author: detection-engine
+date: 2026/08/18
+logsource:
+  product: aws
+  service: iam
+detection:
+  selection:
+    eventSource: iam.amazonaws.com
+    eventName: CreateAccessKey
+  condition: selection
+falsepositives:
+  - Automation that rotates IAM keys
+level: medium
+tags:
+  - attack.persistence
+  - attack.t1098.001

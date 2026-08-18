@@ -1,0 +1,28 @@
+title: Okta Administrator Privilege Assigned
+id: f8603214-b75e-4506-bb35-4295e81da5a0
+status: experimental
+description: >
+  Detects assignment of an Okta admin role to a user. Unexpected admin grants
+  can indicate privilege escalation or account takeover.
+author: detection-engine
+date: 2026/08/18
+logsource:
+  product: okta
+  service: okta
+detection:
+  selection:
+    eventtype:
+      - user.account.privilege.grant
+      - iam.role.assign
+  filter_admin:
+    debugcontext.debugdata.privilegegranted|contains:
+      - Super Administrator
+      - Organization Administrator
+      - Application Administrator
+  condition: selection and filter_admin
+falsepositives:
+  - Planned administrator onboarding
+level: high
+tags:
+  - attack.privilege_escalation
+  - attack.t1098.003

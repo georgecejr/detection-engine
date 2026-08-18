@@ -1,0 +1,36 @@
+name: Validate detections
+
+on:
+  pull_request:
+    paths:
+      - "detections/**"
+      - "scripts/**"
+      - "requirements-dev.txt"
+      - ".github/workflows/validate.yml"
+  push:
+    branches: [main]
+    paths:
+      - "detections/**"
+      - "scripts/**"
+      - "requirements-dev.txt"
+      - ".github/workflows/validate.yml"
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install validation dependencies
+        run: python3 -m pip install -r requirements-dev.txt
+
+      - name: Validate detections tree
+        run: python3 scripts/validate_detections.py

@@ -1,0 +1,112 @@
+{
+  "name": "test_data_2",
+  "logsource": "aws",
+  "description": "AWS CloudTrail fixtures for CloudTrail and IAM detections.",
+  "events": [
+    {
+      "eventVersion": "1.08",
+      "eventTime": "2026-08-18T15:01:12Z",
+      "eventSource": "cloudtrail.amazonaws.com",
+      "eventName": "StopLogging",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.45",
+      "userAgent": "aws-cli/2.17.0",
+      "requestParameters": {
+        "name": "org-management-trail"
+      },
+      "responseElements": {
+        "name": "org-management-trail"
+      },
+      "requestID": "a1b2c3d4-1111-2222-3333-444455556666",
+      "eventID": "7f2a91c0-3e55-4d88-9b10-cloudtrail-stop",
+      "eventType": "AwsApiCall",
+      "recipientAccountId": "111122223333",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "AIDAIOSFODNN7EXAMPLE",
+        "arn": "arn:aws:iam::111122223333:user/alice",
+        "accountId": "111122223333",
+        "userName": "alice"
+      }
+    },
+    {
+      "eventVersion": "1.08",
+      "eventTime": "2026-08-18T15:04:41Z",
+      "eventSource": "cloudtrail.amazonaws.com",
+      "eventName": "DeleteTrail",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.45",
+      "userAgent": "aws-cli/2.17.0",
+      "requestParameters": {
+        "name": "org-management-trail"
+      },
+      "responseElements": null,
+      "requestID": "b2c3d4e5-2222-3333-4444-555566667777",
+      "eventID": "0c8d44aa-91b7-4f02-a6de-cloudtrail-delete",
+      "eventType": "AwsApiCall",
+      "recipientAccountId": "111122223333",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "AIDAIOSFODNN7EXAMPLE",
+        "arn": "arn:aws:iam::111122223333:user/alice",
+        "accountId": "111122223333",
+        "userName": "alice"
+      }
+    },
+    {
+      "eventVersion": "1.08",
+      "eventTime": "2026-08-18T15:09:03Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "CreateAccessKey",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "203.0.113.88",
+      "userAgent": "aws-sdk-go/1.51.0",
+      "requestParameters": {
+        "userName": "alice"
+      },
+      "responseElements": {
+        "accessKey": {
+          "userName": "alice",
+          "status": "Active",
+          "accessKeyId": "AKIAIOSFODNN7EXAMPLE"
+        }
+      },
+      "requestID": "c3d4e5f6-3333-4444-5555-666677778888",
+      "eventID": "91e0bb17-6c4a-4d33-b8f1-iam-key-create",
+      "eventType": "AwsApiCall",
+      "recipientAccountId": "111122223333",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "AIDAIOSFODNN7EXAMPLE",
+        "arn": "arn:aws:iam::111122223333:user/alice",
+        "accountId": "111122223333",
+        "userName": "alice"
+      }
+    },
+    {
+      "eventVersion": "1.08",
+      "eventTime": "2026-08-18T15:11:27Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "AttachUserPolicy",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "203.0.113.88",
+      "userAgent": "aws-sdk-go/1.51.0",
+      "requestParameters": {
+        "userName": "alice",
+        "policyArn": "arn:aws:iam::aws:policy/AdministratorAccess"
+      },
+      "responseElements": null,
+      "requestID": "d4e5f6a7-4444-5555-6666-777788889999",
+      "eventID": "bb31f0c8-2a19-4e77-90cd-iam-policy-attach",
+      "eventType": "AwsApiCall",
+      "recipientAccountId": "111122223333",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "AIDAIOSFODNN7EXAMPLE",
+        "arn": "arn:aws:iam::111122223333:user/alice",
+        "accountId": "111122223333",
+        "userName": "alice"
+      }
+    }
+  ]
+}
