@@ -1,0 +1,21 @@
+title: Okta MFA Factor Reset
+id: 2d4d54ee-9656-4502-b779-6d12d31b1e6e
+status: experimental
+description: >
+  Detects when all MFA factors are reset for an Okta user. Attackers who have
+  compromised credentials often reset MFA to persist access.
+author: detection-engine
+date: 2026/08/18
+logsource:
+  product: okta
+  service: okta
+detection:
+  selection:
+    eventtype: user.mfa.factor.reset_all
+  condition: selection
+falsepositives:
+  - Helpdesk-initiated MFA resets
+level: medium
+tags:
+  - attack.persistence
+  - attack.t1556.006

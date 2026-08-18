@@ -1,0 +1,22 @@
+title: Okta Admin Application Sign-On Policy Modified
+id: 914c1d22-fd78-4537-814d-d8511368283f
+status: experimental
+description: Detects modification of Okta application sign-on or authentication policy.
+author: detection-engine
+date: 2026/08/18
+logsource:
+  product: okta
+  service: okta
+detection:
+  selection:
+    eventtype:
+      - application.policy.sign_on.update
+      - policy.lifecycle.update
+      - policy.rule.update
+  condition: selection
+falsepositives:
+  - Scheduled identity-policy changes
+level: medium
+tags:
+  - attack.defense_evasion
+  - attack.t1484.002

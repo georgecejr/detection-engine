@@ -1,0 +1,19 @@
+title: Okta User Created
+id: c59a3120-51af-427a-9fa6-9567cf391b9b
+status: experimental
+description: Detects creation of a new Okta user account.
+author: detection-engine
+date: 2026/08/18
+logsource:
+  product: okta
+  service: okta
+detection:
+  selection:
+    eventtype: user.lifecycle.create
+  condition: selection
+falsepositives:
+  - Expected provisioning from an identity provider or HR system
+level: low
+tags:
+  - attack.persistence
+  - attack.t1136.003

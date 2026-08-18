@@ -1,0 +1,20 @@
+title: AWS CloudTrail Trail Deleted
+id: bd1e2195-46c0-4cb3-b2cb-d109daab8164
+status: experimental
+description: Detects deletion of an AWS CloudTrail trail.
+author: detection-engine
+date: 2026/08/18
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    eventSource: cloudtrail.amazonaws.com
+    eventName: DeleteTrail
+  condition: selection
+falsepositives:
+  - Planned trail replacement
+level: high
+tags:
+  - attack.defense_evasion
+  - attack.t1562.001

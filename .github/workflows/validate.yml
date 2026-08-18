@@ -1,0 +1,32 @@
+name: Validate detections
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install package
+        run: python3 -m pip install -r requirements-dev.txt
+
+      - name: Validate detections tree
+        run: python3 -m detection_engine validate
+
+      - name: Run unit tests
+        run: python3 -m pytest -q
+
+      - name: Evaluate sample events
+        run: python3 -m detection_engine run

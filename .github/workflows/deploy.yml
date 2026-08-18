@@ -1,0 +1,59 @@
+name: Deploy detections
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "detections/**"
+      - "src/**"
+      - "scripts/**"
+      - "tests/**"
+      - "pyproject.toml"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-detections
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    uses: ./.github/workflows/validate.yml
+
+  deploy:
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Package detections
+        run: |
+          mkdir -p dist
+          tar -czf dist/detections.tar.gz detections/sigma detections/sql detections/samples
+          tar -tzf dist/detections.tar.gz
+
+      - name: Upload detections artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: detections
+          path: dist/detections.tar.gz
+          if-no-files-found: error
+
+      - name: Deploy
+        env:
+          DETECTION_DEPLOY_URL: ${{ secrets.DETECTION_DEPLOY_URL }}
+          DETECTION_DEPLOY_TOKEN: ${{ secrets.DETECTION_DEPLOY_TOKEN }}
+        run: |
+          if [ -z "${DETECTION_DEPLOY_URL}" ]; then
+            echo "DETECTION_DEPLOY_URL is not set; packaging only."
+            exit 0
+          fi
+          curl --fail --silent --show-error \
+            -X POST \
+            -H "Authorization: Bearer ${DETECTION_DEPLOY_TOKEN}" \
+            -H "Content-Type: application/gzip" \
+            --data-binary @dist/detections.tar.gz \
+            "${DETECTION_DEPLOY_URL}"
