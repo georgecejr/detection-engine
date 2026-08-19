@@ -21,10 +21,8 @@ jobs:
           chmod +x runreveal
           rm runreveal-linux-amd64.tar.gz
 
-      - name: Check RunReveal authentication options
-        run: |
-          ./runreveal auth --help
-
       - name: Deploy detections
+        env:
+          RUNREVEAL_TOKEN: ${{ secrets.RUNREVEAL_TOKEN }}
         run: |
           ./runreveal detections sync -d ./sql
