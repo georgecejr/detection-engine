@@ -1,0 +1,96 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+
+jobs:
+  validate:
+    name: Validate detections and samples
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install validators
+        run: pip install pyyaml
+
+      - name: Validate JSON samples
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          samples = list(Path("samples").glob("*.json"))
+          if not samples:
+              raise SystemExit("No JSON samples found in samples/")
+
+          for path in samples:
+              with path.open(encoding="utf-8") as fh:
+                  json.load(fh)
+              print(f"OK  {path}")
+          PY
+
+      - name: Validate Sigma YAML
+        run: |
+          python - <<'PY'
+          import sys
+          from pathlib import Path
+
+          try:
+              import yaml
+          except ImportError:
+              sys.exit("PyYAML is required")
+
+          files = list(Path("sigma").rglob("*.yml")) + list(Path("sigma").rglob("*.yaml"))
+          if not files:
+              print("No Sigma rules found; skipping YAML parse.")
+              sys.exit(0)
+
+          failed = False
+          for path in files:
+              try:
+                  with path.open(encoding="utf-8") as fh:
+                      docs = list(yaml.safe_load_all(fh))
+                  if not any(doc is not None for doc in docs):
+                      print(f"FAIL {path}: empty document")
+                      failed = True
+                      continue
+                  print(f"OK  {path}")
+              except yaml.YAMLError as exc:
+                  print(f"FAIL {path}: {exc}")
+                  failed = True
+
+          if failed:
+              sys.exit(1)
+          PY
+
+      - name: Check SQL detections
+        run: |
+          python - <<'PY'
+          import sys
+          from pathlib import Path
+
+          files = list(Path("sql").rglob("*.sql"))
+          if not files:
+              print("No SQL detections found; skipping.")
+              sys.exit(0)
+
+          failed = False
+          for path in files:
+              text = path.read_text(encoding="utf-8").strip()
+              if not text:
+                  print(f"FAIL {path}: empty file")
+                  failed = True
+                  continue
+              print(f"OK  {path}")
+
+          if failed:
+              sys.exit(1)
+          PY

@@ -1,0 +1,11 @@
+{
+  "eventName": "ListStacks",
+  "eventSource": "cloudformation.amazonaws.com",
+  "userIdentity": {
+    "type": "Root",
+    "accountId": "REDACTED"
+  },
+  "awsRegion": "us-east-1",
+  "sourceIPAddress": "REDACTED",
+  "readOnly": true
+}

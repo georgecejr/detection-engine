@@ -1,0 +1,93 @@
+{
+  "source": "okta",
+  "description": "Sample Okta System Log events for user and admin detection tests",
+  "events": [
+    {
+      "uuid": "okta-evt-001",
+      "published": "2026-08-18T16:00:00.000Z",
+      "eventType": "user.session.start",
+      "outcome": { "result": "SUCCESS" },
+      "actor": {
+        "id": "00u1a2b3c4d5e6f7g8h9",
+        "type": "User",
+        "alternateId": "alice@example.com",
+        "displayName": "Alice Johnson"
+      },
+      "client": {
+        "ipAddress": "203.0.113.10",
+        "userAgent": { "rawUserAgent": "Mozilla/5.0" },
+        "geographicalContext": { "country": "US", "city": "Austin" }
+      },
+      "target": [
+        {
+          "id": "00u1a2b3c4d5e6f7g8h9",
+          "type": "User",
+          "alternateId": "alice@example.com"
+        }
+      ]
+    },
+    {
+      "uuid": "okta-evt-002",
+      "published": "2026-08-18T16:05:12.000Z",
+      "eventType": "user.account.reset_password",
+      "outcome": { "result": "SUCCESS" },
+      "actor": {
+        "id": "00u9z8y7x6w5v4u3t2s1",
+        "type": "User",
+        "alternateId": "admin@example.com",
+        "displayName": "Okta Admin"
+      },
+      "client": {
+        "ipAddress": "198.51.100.42",
+        "geographicalContext": { "country": "DE", "city": "Frankfurt" }
+      },
+      "target": [
+        {
+          "id": "00u1a2b3c4d5e6f7g8h9",
+          "type": "User",
+          "alternateId": "alice@example.com"
+        }
+      ]
+    },
+    {
+      "uuid": "okta-evt-003",
+      "published": "2026-08-18T16:08:44.000Z",
+      "eventType": "user.mfa.okta_verify.deny_push",
+      "outcome": { "result": "FAILURE" },
+      "actor": {
+        "id": "00u1a2b3c4d5e6f7g8h9",
+        "type": "User",
+        "alternateId": "alice@example.com",
+        "displayName": "Alice Johnson"
+      },
+      "client": {
+        "ipAddress": "203.0.113.88",
+        "geographicalContext": { "country": "RU", "city": "Moscow" }
+      }
+    },
+    {
+      "uuid": "okta-evt-004",
+      "published": "2026-08-18T16:12:01.000Z",
+      "eventType": "user.account.privilege.grant",
+      "outcome": { "result": "SUCCESS" },
+      "actor": {
+        "id": "00u9z8y7x6w5v4u3t2s1",
+        "type": "User",
+        "alternateId": "admin@example.com",
+        "displayName": "Okta Admin"
+      },
+      "target": [
+        {
+          "id": "00u1a2b3c4d5e6f7g8h9",
+          "type": "User",
+          "alternateId": "alice@example.com"
+        },
+        {
+          "id": "00gsuperadmin",
+          "type": "UserGroup",
+          "displayName": "Super Administrators"
+        }
+      ]
+    }
+  ]
+}

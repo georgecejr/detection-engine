@@ -1,0 +1,96 @@
+{
+  "source": "aws",
+  "description": "Sample AWS CloudTrail and IAM events for detection tests",
+  "events": [
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-08-18T16:20:00Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "CreateUser",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "203.0.113.50",
+      "userAgent": "aws-cli/2.15.0",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "AIDAEXAMPLEADMIN",
+        "arn": "arn:aws:iam::111122223333:user/secops-admin",
+        "accountId": "111122223333",
+        "userName": "secops-admin"
+      },
+      "requestParameters": {
+        "userName": "temp-breakglass"
+      },
+      "responseElements": {
+        "user": {
+          "userName": "temp-breakglass",
+          "arn": "arn:aws:iam::111122223333:user/temp-breakglass"
+        }
+      },
+      "eventID": "aws-evt-001",
+      "eventType": "AwsApiCall",
+      "recipientAccountId": "111122223333"
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-08-18T16:21:15Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "AttachUserPolicy",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "203.0.113.50",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "AIDAEXAMPLEADMIN",
+        "arn": "arn:aws:iam::111122223333:user/secops-admin",
+        "accountId": "111122223333",
+        "userName": "secops-admin"
+      },
+      "requestParameters": {
+        "userName": "temp-breakglass",
+        "policyArn": "arn:aws:iam::aws:policy/AdministratorAccess"
+      },
+      "responseElements": null,
+      "eventID": "aws-evt-002",
+      "eventType": "AwsApiCall",
+      "recipientAccountId": "111122223333"
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-08-18T16:25:33Z",
+      "eventSource": "cloudtrail.amazonaws.com",
+      "eventName": "StopLogging",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "198.51.100.77",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "AROAEXAMPLE:session",
+        "arn": "arn:aws:sts::111122223333:assumed-role/AdminRole/session",
+        "accountId": "111122223333"
+      },
+      "requestParameters": {
+        "name": "management-events"
+      },
+      "eventID": "aws-evt-003",
+      "eventType": "AwsApiCall",
+      "recipientAccountId": "111122223333"
+    },
+    {
+      "eventVersion": "1.09",
+      "eventTime": "2026-08-18T16:30:02Z",
+      "eventSource": "sts.amazonaws.com",
+      "eventName": "AssumeRole",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "203.0.113.200",
+      "userIdentity": {
+        "type": "AWSAccount",
+        "accountId": "999988887777"
+      },
+      "requestParameters": {
+        "roleArn": "arn:aws:iam::111122223333:role/OrganizationAccountAccessRole",
+        "roleSessionName": "cross-account-session"
+      },
+      "eventID": "aws-evt-004",
+      "eventType": "AwsApiCall",
+      "recipientAccountId": "111122223333"
+    }
+  ]
+}

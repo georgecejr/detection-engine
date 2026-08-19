@@ -1,0 +1,13 @@
+.DS_Store
+Thumbs.db
+*.pyc
+__pycache__/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+dist/
+*.tar.gz
+.idea/
+.vscode/

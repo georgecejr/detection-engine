@@ -1,0 +1,11 @@
+{
+  "eventName": "CreateBucket",
+  "eventSource": "s3.amazonaws.com",
+  "userIdentity": {
+    "type": "Root",
+    "accountId": "REDACTED"
+  },
+  "awsRegion": "us-east-1",
+  "sourceIPAddress": "REDACTED",
+  "readOnly": false
+}
