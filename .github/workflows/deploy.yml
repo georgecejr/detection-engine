@@ -21,9 +21,9 @@ jobs:
           chmod +x runreveal
           rm runreveal-linux-amd64.tar.gz
 
-      - name: Configure RunReveal
+      - - name: Authenticate with RunReveal
         run: |
-          ./runreveal configure --api-key "${{ secrets.RUNREVEAL_TOKEN }}"
+          ./runreveal auth --help
 
       - name: Deploy detections
         run: |
