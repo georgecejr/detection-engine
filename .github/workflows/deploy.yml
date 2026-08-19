@@ -21,7 +21,7 @@ jobs:
           chmod +x runreveal
           rm runreveal-linux-amd64.tar.gz
 
-      - - name: Authenticate with RunReveal
+      - name: Check RunReveal authentication options
         run: |
           ./runreveal auth --help
 
