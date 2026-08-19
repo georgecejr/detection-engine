@@ -3,34 +3,28 @@ name: Deploy
 on:
   push:
     branches: [main, master]
-  workflow_dispatch:
-
-concurrency:
-  group: deploy-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
   deploy:
     name: Deploy detections
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Package detections
+      - name: Setup RunReveal CLI
         run: |
-          mkdir -p dist
-          tar -czf dist/detections.tar.gz sigma sql samples
-          echo "Packaged Sigma rules, SQL detections, and samples."
-          ls -l dist
+          curl -L https://github.com/runreveal/homebrew-runreveal/releases/latest/download/runreveal-linux-amd64.tar.gz \
+            -o runreveal-linux-amd64.tar.gz
+          tar -xvf runreveal-linux-amd64.tar.gz
+          chmod +x runreveal
+          rm runreveal-linux-amd64.tar.gz
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: detections
-          path: dist/detections.tar.gz
-
-      - name: Deploy
+      - name: Configure RunReveal
         run: |
-          echo "Deploy step is a placeholder."
-          echo "Wire this job to your SIEM, detection platform, or object store."
+          ./runreveal configure --api-key "${{ secrets.RUNREVEAL_TOKEN }}"
+
+      - name: Deploy detections
+        run: |
+          ./runreveal detections sync -d ./sql
