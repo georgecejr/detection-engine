@@ -1,0 +1,12 @@
+{
+  "eventTime": "2026-08-19T03:42:44Z",
+  "eventName": "PutBucketEncryption",
+  "eventSource": "s3.amazonaws.com",
+  "userIdentity": {
+    "type": "Root",
+    "accountId": "REDACTED"
+  },
+  "awsRegion": "us-east-2",
+  "srcIP": "REDACTED",
+  "readOnly": false
+}

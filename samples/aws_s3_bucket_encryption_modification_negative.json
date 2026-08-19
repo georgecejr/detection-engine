@@ -1,0 +1,12 @@
+{
+  "eventTime": "2026-08-19T03:42:44Z",
+  "eventName": "GetBucketAcl",
+  "eventSource": "s3.amazonaws.com",
+  "userIdentity": {
+    "type": "AWSService",
+    "accountId": ""
+  },
+  "awsRegion": "us-east-2",
+  "srcIP": "cloudtrail.amazonaws.com",
+  "readOnly": true
+}
