@@ -1,0 +1,22 @@
+[
+    {
+        "detection_file": "sql/aws/cloudtrail/aws_root_account_modification_positive.sql",
+        "input_file": "samples/aws_root_account_modification_positive.json",
+        "expected_exit_code": 0
+    },
+    {
+        "detection_file": "sql/aws/cloudtrail/aws_root_account_modification_negative.sql",
+        "input_file": "samples/aws_root_account_modification_negative.json",
+        "expected_exit_code": 0
+    },
+    {
+        "detection_file": "sql/aws/cloudtrail/aws_s3_bucket_encryption_modification.sql",
+        "input_file": "samples/aws_s3_bucket_encryption_modification_positive.json",
+        "expected_exit_code": 1
+    },
+    {
+        "detection_file": "sql/aws/cloudtrail/aws_s3_bucket_encryption_modification.sql",
+        "input_file": "samples/aws_s3_bucket_encryption_modification_negative.json",
+        "expected_exit_code": 0
+    }
+]
